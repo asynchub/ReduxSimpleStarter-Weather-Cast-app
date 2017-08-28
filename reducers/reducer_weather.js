@@ -3,6 +3,6 @@
 // state = null (defaulted to null)
 // action
 export default function ReducerWeather(state = null, action) {
-  console.log("Action created: ", action);
+  console.log("Action received: ", action);
   return state;
 }
