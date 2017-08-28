@@ -39,4 +39,9 @@ export function fetchWeather(city) {
 // AJAX request is made by axios.get(url), returning promise into const request
 // a promise is a data structure that does not yet contain any of our weather request data
 // the promise (request) is passed on the payload key in action object
-//
+// theeeen, redux-promise is manipulating action in the middle, between action creator and reducer
+// redux-promise is the middleware, that sees the incoming action, looks at specificly the payload property
+// if the payload is a promise, then redux-promise stops the action entirely and then
+// once the request finishes, redux-promise dispatches a new action of the same type, but
+// with the payload of the resolved request (promise)
+// in other words it stops action, unwraps promise and sends data resulted from promise to reducer
