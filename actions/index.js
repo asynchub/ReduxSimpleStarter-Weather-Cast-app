@@ -19,8 +19,10 @@ export function fetchWeather(city) {
   // api call is made by rules for this weather site:
   // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
   const url = `${ROOT_URL}&q=${city},EE`
-  // get the request using axios
+  // get the request using axios, axios.get(url) returns a promise
   const request = axios.get(url);
+  
+  console.log('Request: ', request); // temporarily, just to see, what request returns here
 
   return {
     // to keep types consistent between action creators and reducers
@@ -29,3 +31,12 @@ export function fetchWeather(city) {
     payload: request
   }
 }
+
+// App flow:
+// whenever user enters the search term, submits the form
+// form calls the action creator, and passes in the city as argument
+// action greator grabs the url, using city argument
+// AJAX request is made by axios.get(url), returning promise into const request
+// a promise is a data structure that does not yet contain any of our weather request data
+// the promise (request) is passed on the payload key in action object
+//
