@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = { term: '' };
-
-    // bind onInputChange to this object excution context
-    // instead of passing callback fat arrow function to onChange event
+    
+    // whenever we have a callback, that we pass to JSX element, 
+    // (instead of passing callback fat arrow function: to onChange event, for example),
+    // and make reference to this keyword (like: onChange={this.onImputChange},
+    // then we need to bind that callback to this excution context of 'this',
+    // using .bind() function,
+    // make it in constructor() definition
+    // then 'this' will refer to this object
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(event) {
@@ -20,7 +28,10 @@ export default class SearchBar extends Component {
   onFormSubmit(event) {
     event.preventDefault();
 
-    // we need to go and fetch weather data
+    // we need to go and fetch weather data with use of "binded and dispatched" action creator
+    this.props.fetchWeather(this.state.term);
+    // setState causes component/container to rerender, where it sets the value of input to state.term
+    this.setState({term: ''});
   }
 
   render() {
@@ -46,3 +57,12 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  // bindActionCreators makes action creator function to flow through middleware and reducers when called
+  // and bind it to this container props
+  return bindActionCreators( {fetchWeather: fetchWeather}, dispatch);
+}
+
+// mapDispatchToProps goes always into 2nd argument of connect function
+exort default connect(null, mapDispatchToProps)(SearchBar);
