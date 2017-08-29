@@ -6,7 +6,7 @@ function average(data) {
   return _.round(_.sum(data)/data.length);
 }
 
-export default ({data, color}) => {
+export default ({data, color, units}) => {
   // const avg = _.round(_.sum(data)/data.length);
   return (
     <div>
@@ -15,7 +15,7 @@ export default ({data, color}) => {
         <SparklinesReferenceLine type="avg" />
       </Sparklines>
       <div>
-        {average(data)}
+        {average(data)} {units}
       </div>
     </div>
   );
