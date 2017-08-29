@@ -22,7 +22,7 @@ export function fetchWeather(city) {
   // get the request using axios, axios.get(url) returns a promise
   const request = axios.get(url);
 
-  console.log('Request: ', request);
+  // console.log('Request: ', request);
 
   return {
     // to keep types consistent between action creators and reducers

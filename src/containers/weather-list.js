@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
-
+import Chart from '../components/chart';
 // import fetchWeather from '../actions/index';
 
 class WeatherList extends Component {
@@ -12,7 +11,9 @@ class WeatherList extends Component {
   renderWeather(cityData) {
     const cityName = cityData.city.name;
     // extract temperatures and make array of them
-    const temps = cityData.list.map((data) => data.main.temp);
+    const temperatures = cityData.list.map((data) => data.main.temp - 273);
+    const pressures = cityData.list.map((data) => data.main.pressure);
+    const humidities = cityData.list.map((data) => data.main.humidity);
     // console.log(temps);
 
     // the key to be added to the top level element of the list
@@ -20,9 +21,13 @@ class WeatherList extends Component {
       <tr key={cityName}>
         <td>{cityName}</td>
         <td>
-          <Sparklines height={120} width={180} data={temps}>
-            <SparklinesLine color="blue" />
-          </Sparklines>
+          <Chart data={temperatures} color="blue" />
+        </td>
+        <td>
+          <Chart data={pressures} color="orange" />
+        </td>
+        <td>
+          <Chart data={humidities} color="grey" />
         </td>
       </tr>
     );
