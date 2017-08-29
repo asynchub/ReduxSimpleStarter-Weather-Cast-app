@@ -7,9 +7,11 @@ import GoogleMap from '../components/google_map';
 
 class WeatherList extends Component {
 
-  // function to render weather list of cities
-  // takes the argument for every call a particular city's data
+  // function to render weather list of cities one by one
+  // takes each element of weather list as argument for every call 
+  // weather.n argument is named here as a particular city's data
   renderWeather(cityData) {
+    // now, more detailed data can be taken on each element of weather list item:
     const cityName = cityData.city.name;
     // extract temperatures and make array of them
     const temperatures = cityData.list.map((data) => data.main.temp - 273);
@@ -21,7 +23,9 @@ class WeatherList extends Component {
 
     // the key to be added to the top level element of the list
     // insert the GoogleMap component instead of cityName property,
-    // passing lattitude and longitude to this component
+    // passing lattitude and longitude to GoogleMap component,
+    // passing temperatures, pressures and humidities as data to reusable Chart component
+    // passing units as well,
     // and style this in style.css file of the project
     return(
       <tr key={cityName}>
@@ -42,7 +46,8 @@ class WeatherList extends Component {
   // the fetchWeather request is resolved.  Whenever the application state is
   // updated, all components in the app will automatically update- this is
   // when 'renderWeather' will be called again. (S. Grider)
-
+  // after mapStateToProps has returned state.weather as this.props.weather,
+  // we use this in this container to get particular data from weather data array.
   render() {
     return(
       <table className="table table-hover">
