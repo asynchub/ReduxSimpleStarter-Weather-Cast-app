@@ -27,6 +27,7 @@ class SearchBar extends Component {
   }
 
   onFormSubmit(event) {
+    // prevent page reload and html document change upon form submitting
     event.preventDefault();
 
     // we need to go and fetch weather data with use of "binded and dispatched" action creator
@@ -39,8 +40,7 @@ class SearchBar extends Component {
     return (
       // controlled field is a form element where the value of the input is set by the state of component
       <form
-        // prevent page reload and html document change upon form submitting
-        // action by adding event handler to form element
+        // action triggering by adding event handler to form element
         onSubmit={this.onFormSubmit}
         className="input-group">
         <input
