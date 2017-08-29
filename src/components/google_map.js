@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // google maps are wired to this project in index.html
 
+// alternatively, this can be made with functional component and GoogleMapLoader
 class GoogleMap extends Component {
   // 3rd party libraries interaction with React:
   
