@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Chart from '../components/chart';
+import GoogleMap from '../components/google_map';
 // import fetchWeather from '../actions/index';
 
 class WeatherList extends Component {
@@ -14,12 +15,17 @@ class WeatherList extends Component {
     const temperatures = cityData.list.map((data) => data.main.temp - 273);
     const pressures = cityData.list.map((data) => data.main.pressure);
     const humidities = cityData.list.map((data) => data.main.humidity);
+    const { lat, lon } = cityData.city.coord; // const lat = cityData.city.coord.lat; const lon = cityData.city.coord.lon;
+    
     // console.log(temps);
 
     // the key to be added to the top level element of the list
+    // insert the GoogleMap component instead of cityName property,
+    // passing lattitude and longitude to this component
+    // and style this in style.css file of the project
     return(
       <tr key={cityName}>
-        <td>{cityName}</td>
+        <td><GoogleMap lat={lat} lon={lon} /></td> // {cityName}
         <td>
           <Chart data={temperatures} color="blue" units="C" />
         </td>
