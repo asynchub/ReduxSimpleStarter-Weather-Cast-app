@@ -26,8 +26,8 @@ export function fetchWeather(city) {
 
   return {
     // to keep types consistent between action creators and reducers
-    // pass the request to payload
     type: FETCH_WEATHER,
+    // pass the request to payload
     payload: request
   }
 }
